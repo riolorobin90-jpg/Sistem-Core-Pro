@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Gestione Ordini Magazzino</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: 'var(--color-primary)',
+                        secondary: 'var(--color-secondary)',
+                        dark: '#0F172A',
+                        darker: '#0B0F19',
+                        card: 'rgba(30, 41, 59, 0.7)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --color-primary: #F97316;
+            --color-secondary: #FACC15;
+        }
+
+        .logo-shadow {
+            box-shadow: 0 10px 15px -3px var(--color-primary), 0 4px 6px -4px var(--color-primary);
+        }
+    </style>
+</head>
+<body class="bg-darker text-white font-sans min-h-screen relative overflow-x-hidden selection:bg-primary selection:text-white">
+
+    <!-- Background Elements -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary opacity-10 blur-[120px]"></div>
+        <div class="absolute top-[40%] -right-[10%] w-[40%] h-[40%] rounded-full bg-secondary opacity-5 blur-[100px]"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-dark/80 backdrop-blur-md border-b border-white/10 p-4 md:p-6 shadow-lg">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg logo-shadow">
+                    <i class="ph-bold ph-hamburger text-2xl text-white"></i>
+                </div>
+                <div>
+                    <h1 id="appNameHeader" class="text-2xl font-bold tracking-tight">Caricamento...</h1>
+                    <p class="text-sm text-gray-400 font-medium">Gestione Ordini</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="admin.html" aria-label="Pannello Admin" class="hidden md:flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                    <i class="ph-bold ph-gear text-xl"></i>
+                    <span>Admin</span>
+                </a>
+                <button id="generateOrdersBtn" class="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary to-red-500 hover:opacity-90 text-white font-semibold py-2.5 px-6 rounded-full shadow-lg transition-all active:scale-95 group">
+                    <i class="ph-bold ph-shopping-cart text-lg group-hover:animate-bounce"></i>
+                    <span>Genera Ordini</span>
+                    <span id="headerCartCount" class="bg-white text-primary text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center ml-2 opacity-0 transition-opacity">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto p-4 md:p-6 pb-48">
+        <!-- Loading State -->
+        <div id="loader" class="flex flex-col items-center justify-center py-20">
+            <div class="w-16 h-16 border-4 border-white/10 border-t-primary rounded-full animate-spin"></div>
+            <p class="mt-4 text-gray-400 animate-pulse font-medium">Caricamento catalogo...</p>
+        </div>
+
+        <!-- Catalog Container -->
+        <div id="catalogContainer" class="hidden space-y-12">
+            <!-- Categories will be injected here -->
+        </div>
+
+        <!-- Orders View (Hidden by default) -->
+        <div id="ordersContainer" class="hidden space-y-8 animate-fade-in">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold flex items-center gap-3">
+                    <i class="ph-duotone ph-receipt text-primary"></i>
+                    Riepilogo Ordini
+                </h2>
+                <button id="backToCatalogBtn" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 font-medium">
+                    <i class="ph-bold ph-arrow-left"></i>
+                    Torna al Catalogo
+                </button>
+            </div>
+            
+            <div id="ordersList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Orders by supplier will be injected here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Floating Button -->
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:hidden w-full px-4 flex gap-2">
+        <a href="admin.html" aria-label="Pannello Admin" class="w-14 h-14 flex items-center justify-center bg-dark/80 backdrop-blur-md border border-white/10 text-white rounded-2xl shadow-xl transition-all active:scale-95">
+            <i class="ph-bold ph-gear text-2xl"></i>
+        </a>
+        <button id="mobileGenerateOrdersBtn" class="flex-grow flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-red-500 text-white font-bold py-4 px-6 rounded-2xl shadow-xl transition-all active:scale-95">
+            <i class="ph-bold ph-shopping-cart text-xl"></i>
+            <span>Genera Ordini</span>
+            <span id="mobileCartCount" class="bg-white text-primary text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center ml-2 hidden">0</span>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+</html>
