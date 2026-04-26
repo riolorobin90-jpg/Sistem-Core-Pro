@@ -49,13 +49,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.documentElement.style.setProperty('--brand-red', appConfig.secondaryColor);
         
         // Update Logo
-        const logoContainer = document.getElementById('app-logo');
-        if (appConfig.logoBase64) {
+        const logoContainer = document.getElementById('logo-container');
+        if (appConfig.logoBase64 && logoContainer) {
             logoContainer.innerHTML = `<img src="${appConfig.logoBase64}" class="w-10 h-10 object-contain">`;
         }
         
         // Update Title
-        document.getElementById('display-app-name').innerText = appConfig.appName;
+        const nameDisplay = document.getElementById('app-name-display');
+        if (nameDisplay) {
+            nameDisplay.innerText = appConfig.appName;
+        }
     }
 
     function renderCategories() {
