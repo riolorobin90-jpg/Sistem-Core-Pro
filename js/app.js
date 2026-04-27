@@ -2,8 +2,14 @@
  * app.js - Frontend Logic for Burger Lab
  */
 
+// Global State
+let order = {};
+
 document.addEventListener('DOMContentLoaded', async () => {
-    // 1. Initial Load
+    // 1. State
+
+
+    // 2. Initial Load
     const loadingScreen = document.getElementById('loading-screen');
     const appContent = document.getElementById('app-content');
 
@@ -114,20 +120,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function getCategoryIcon(cat) {
         const map = {
-            'Bakery': 'bread',
-            'Carni': 'beef',
-            'Latticini': 'cheese',
+            'Bakery': 'croissant',
+            'Carni': 'drumstick',
+            'Latticini': 'milk',
             'Ortofrutta': 'leaf',
             'Surgelati': 'snowflake',
-            'Salse': 'droplet',
-            'Bevande': 'cup-soda',
+            'Salse': 'droplets',
+            'Bevande': 'glass-water',
             'Spezie': 'sparkles',
             'Packaging': 'package'
         };
         return map[cat] || 'package';
     }
 
-    const order = {};
+
 
     function attachItemEvents() {
         document.querySelectorAll('.plus-btn').forEach(btn => {
