@@ -87,29 +87,50 @@ document.addEventListener('DOMContentLoaded', () => {
         const categories = [...new Set(productsData.map(p => p.category))];
         let html = '';
         categories.forEach(cat => {
-            html += `
-            <tr class="bg-white/5">
-                <td colspan="4" class="py-3 px-4 font-black text-brand-orange uppercase tracking-widest text-xs">${cat}</td>
-                <td class="py-3 px-2 text-right">
-                    <button class="text-xs bg-brand-orange/20 text-brand-orange hover:bg-brand-orange hover:text-white px-3 py-1 rounded-lg transition-colors font-bold btn-add-cat-product" data-cat="${cat}">+ Aggiungi</button>
-                </td>
-            </tr>`;
             const items = productsData.filter(p => p.category === cat);
+            
+            html += `
+            <div class="category-card bg-white/[0.03] border border-white/[0.05] rounded-3xl p-6 backdrop-blur-xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+                    <div class="flex items-center gap-4">
+                        <h2 class="text-xl font-bold text-brand-orange uppercase tracking-widest">${cat}</h2>
+                        <span class="text-xs font-medium text-white/30 uppercase tracking-widest">${items.length} Articoli</span>
+                    </div>
+                    <button class="bg-brand-orange/20 text-brand-orange hover:bg-brand-orange hover:text-white px-4 py-2 rounded-xl transition-all font-bold btn-add-cat-product self-start sm:self-auto" data-cat="${cat}">+ Aggiungi a ${cat}</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-white/30 text-[10px] uppercase tracking-widest border-b border-white/5">
+                                <th class="pb-3 px-2">Nome</th>
+                                <th class="pb-3 px-2">Fornitore</th>
+                                <th class="pb-3 px-2">Unità</th>
+                                <th class="pb-3 px-2 text-right">Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+            `;
+            
             html += items.map(p => `
-                <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
-                    <td class="py-3 px-4 font-bold">
-                        ${p.name}
-                        ${p.whatsapp ? `<br><span class="text-[10px] text-brand-whatsapp tracking-wider opacity-80">📱 WA: ${p.whatsapp}</span>` : ''}
-                    </td>
-                    <td class="py-3 px-2 text-white/70">${p.supplier}</td>
-                    <td class="py-3 px-2 text-white/70"><span class="bg-white/10 px-2 py-1 rounded text-xs">${p.category}</span></td>
-                    <td class="py-3 px-2 text-white/50">${p.unit}</td>
-                    <td class="py-3 px-2 text-right">
-                        <button class="text-brand-orange hover:text-white mr-3 btn-edit-product transition-colors" data-id="${p.id}">Modifica</button>
-                        <button class="text-red-500 hover:text-red-400 btn-del-product transition-colors" data-id="${p.id}">Elimina</button>
-                    </td>
-                </tr>
+                            <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                <td class="py-3 px-2 font-bold text-white">
+                                    ${p.name}
+                                    ${p.whatsapp ? `<br><span class="text-[10px] text-brand-whatsapp tracking-wider opacity-80 mt-1 inline-block">📱 WA: ${p.whatsapp}</span>` : ''}
+                                </td>
+                                <td class="py-3 px-2 text-white/70">${p.supplier}</td>
+                                <td class="py-3 px-2 text-white/50">${p.unit}</td>
+                                <td class="py-3 px-2 text-right">
+                                    <button class="text-brand-orange hover:text-white mr-3 btn-edit-product transition-colors" data-id="${p.id}">Modifica</button>
+                                    <button class="text-red-500 hover:text-red-400 btn-del-product transition-colors" data-id="${p.id}">Elimina</button>
+                                </td>
+                            </tr>
             `).join('');
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            </div>`;
         });
         productsList.innerHTML = html;
 
