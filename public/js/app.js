@@ -132,6 +132,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             'Salse': 'droplets',
             'Bevande': 'glass-water',
             'Spezie': 'sparkles',
+            'Pesce': 'fish',
             'Packaging': 'package'
         };
         return map[cat] || 'package';

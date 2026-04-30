@@ -4,31 +4,122 @@
  */
 
 const SUPABASE_URL = 'https://epzgzyytcszsfsaxemnj.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwemd6eXl0Y3N6c2ZzYXhlbW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQxMzQyNDIsImV4cCI6MjAyOTcxMDI0Mn0.N6U-Hjc0MDgxeNn0.5rbKhco2A1O9aumcWWkg5abJYErJjZbm5oNsR2qi8UU';
+const SUPABASE_KEY = 'sb_publishable_7bEHJexUgEb5gE2Zf1HmLw_AL94bRIt';
 
 let productsData = [
-    { "id": 1, "name": "Bun Patate (Pack)", "supplier": "Panificio Rossi", "category": "Bakery", "unit": "Pz" },
-    { "id": 2, "name": "Bun Sesamo (Pack)", "supplier": "Panificio Rossi", "category": "Bakery", "unit": "Pz" },
-    { "id": 3, "name": "Hamburger 150g", "supplier": "Macelleria Neri", "category": "Carni", "unit": "Kg" },
-    { "id": 4, "name": "Hamburger 200g", "supplier": "Macelleria Neri", "category": "Carni", "unit": "Kg" },
-    { "id": 5, "name": "Bacon Affumicato", "supplier": "Macelleria Neri", "category": "Carni", "unit": "Kg" },
-    { "id": 6, "name": "Cheddar a fette", "supplier": "Latteria Bianca", "category": "Latticini", "unit": "Pz" },
-    { "id": 7, "name": "Pomodori Ramati", "supplier": "Ortofrutta Verde", "category": "Ortofrutta", "unit": "Kg" },
-    { "id": 8, "name": "Insalata Iceberg", "supplier": "Ortofrutta Verde", "category": "Ortofrutta", "unit": "Kg" },
-    { "id": 9, "name": "Patatine Dippers", "supplier": "Surgelati Gialli", "category": "Surgelati", "unit": "Ct" },
-    { "id": 10, "name": "Nuggets di Pollo", "supplier": "Surgelati Gialli", "category": "Surgelati", "unit": "Ct" },
-    { "id": 11, "name": "Maionese", "supplier": "Salse & Co.", "category": "Salse", "unit": "L" },
-    { "id": 12, "name": "Ketchup", "supplier": "Salse & Co.", "category": "Salse", "unit": "L" },
-    { "id": 13, "name": "Salsa BBQ", "supplier": "Salse & Co.", "category": "Salse", "unit": "L" },
-    { "id": 14, "name": "Coca Cola Vetro", "supplier": "Beverage Spa", "category": "Bevande", "unit": "Cas" },
-    { "id": 15, "name": "Birra Artigianale", "supplier": "Beverage Spa", "category": "Bevande", "unit": "Cas" },
-    { "id": 16, "name": "Pepe Nero in grani", "supplier": "Spezie del Mondo", "category": "Spezie", "unit": "Kg" },
-    { "id": 17, "name": "Paprika Dolce", "supplier": "Spezie del Mondo", "category": "Spezie", "unit": "Kg" },
-    { "id": 18, "name": "Sale Fino", "supplier": "Spezie del Mondo", "category": "Spezie", "unit": "Kg" },
-    { "id": 19, "name": "Vaschette Alluminio", "supplier": "Royil Carta", "category": "Packaging", "unit": "Ct" },
-    { "id": 20, "name": "Vaschette Plastica Trasp.", "supplier": "Royil Carta", "category": "Packaging", "unit": "Ct" },
-    { "id": 21, "name": "Tovaglioli Monovelo", "supplier": "Royil Carta", "category": "Packaging", "unit": "Ct" },
-    { "id": 22, "name": "Bicchieri Plastica", "supplier": "Royil Carta", "category": "Packaging", "unit": "Ct" }
+    // Bakery
+    { "id": 1, "name": "Fluffy Bun Sesamo", "supplier": "Panificio", "category": "Bakery", "unit": "Pz" },
+    { "id": 2, "name": "Palline Impasto Pizza", "supplier": "Panificio", "category": "Bakery", "unit": "Pz" },
+    
+    // Carni e Salumi
+    { "id": 3, "name": "Hamburger Manzo", "supplier": "Macelleria", "category": "Carni", "unit": "Pz" },
+    { "id": 4, "name": "Hamburger Cinghiale", "supplier": "Macelleria", "category": "Carni", "unit": "Pz" },
+    { "id": 5, "name": "Hamburger Cervo", "supplier": "Macelleria", "category": "Carni", "unit": "Pz" },
+    { "id": 6, "name": "Burger Vegetale", "supplier": "Alimentari", "category": "Carni", "unit": "Pz" },
+    { "id": 7, "name": "Bacon", "supplier": "Macelleria", "category": "Carni", "unit": "Kg" },
+    { "id": 8, "name": "Mortadella", "supplier": "Salumificio", "category": "Carni", "unit": "Kg" },
+    { "id": 9, "name": "Prosciutto Crudo", "supplier": "Salumificio", "category": "Carni", "unit": "Kg" },
+    { "id": 10, "name": "Pancetta", "supplier": "Salumificio", "category": "Carni", "unit": "Kg" },
+    { "id": 11, "name": "Salsiccia", "supplier": "Macelleria", "category": "Carni", "unit": "Kg" },
+    { "id": 12, "name": "Capocollo Suino Nebrodi", "supplier": "Salumificio", "category": "Carni", "unit": "Kg" },
+    { "id": 13, "name": "Wurstel", "supplier": "Salumificio", "category": "Carni", "unit": "Kg" },
+    { "id": 14, "name": "Ventricina Piccante", "supplier": "Salumificio", "category": "Carni", "unit": "Kg" },
+    { "id": 15, "name": "Prosciutto Cotto", "supplier": "Salumificio", "category": "Carni", "unit": "Kg" },
+
+    // Latticini e Formaggi
+    { "id": 16, "name": "Scamorza", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 17, "name": "Scamorza Affumicata", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 18, "name": "Cheddar", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 19, "name": "Burratina / Burrata", "supplier": "Caseificio", "category": "Latticini", "unit": "Pz" },
+    { "id": 20, "name": "Mozzarella di Bufala", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 21, "name": "Mozzarella Fiordilatte", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 22, "name": "Maiorchino", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 23, "name": "Provola Sfogliata", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 24, "name": "Tuma Persa", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 25, "name": "Piacentino Ennese", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 26, "name": "Stracciatella", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 27, "name": "Ricotta Fresca", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 28, "name": "Ricotta Salata Nebrodi", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 29, "name": "Grana", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 30, "name": "Gorgonzola Dolce", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 31, "name": "Auricchio Dolce", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    { "id": 32, "name": "Tuma", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+
+    // Ortofrutta
+    { "id": 33, "name": "Insalata Iceberg", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 34, "name": "Cipolle", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 35, "name": "Zucchine", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 36, "name": "Radicchio", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 37, "name": "Melanzane", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 38, "name": "Pomodorino Pachino", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 39, "name": "Rucola", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 40, "name": "Funghi Porcini", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 41, "name": "Broccoli", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 42, "name": "Funghi Champignon", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 43, "name": "Basilico Fresco", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Mz" },
+    { "id": 44, "name": "Uova", "supplier": "Alimentari", "category": "Ortofrutta", "unit": "Pz" },
+
+    // Pesce
+    { "id": 45, "name": "Alici di Mazara", "supplier": "Pescheria", "category": "Pesce", "unit": "Kg" },
+    { "id": 46, "name": "Salmone", "supplier": "Pescheria", "category": "Pesce", "unit": "Kg" },
+    { "id": 47, "name": "Gamberoni", "supplier": "Pescheria", "category": "Pesce", "unit": "Kg" },
+
+    // Salse e Creme
+    { "id": 48, "name": "Ketchup", "supplier": "Alimentari", "category": "Salse", "unit": "L" },
+    { "id": 49, "name": "Maionese", "supplier": "Alimentari", "category": "Salse", "unit": "L" },
+    { "id": 50, "name": "Salsa BBQ", "supplier": "Alimentari", "category": "Salse", "unit": "L" },
+    { "id": 51, "name": "Salsa Greca", "supplier": "Alimentari", "category": "Salse", "unit": "L" },
+    { "id": 52, "name": "Salsa Tartara", "supplier": "Alimentari", "category": "Salse", "unit": "L" },
+    { "id": 53, "name": "Salsa Sweet Chili", "supplier": "Alimentari", "category": "Salse", "unit": "L" },
+    { "id": 54, "name": "Crema di Pistacchio", "supplier": "Alimentari", "category": "Salse", "unit": "Kg" },
+    { "id": 55, "name": "Pesto", "supplier": "Alimentari", "category": "Salse", "unit": "Kg" },
+    { "id": 56, "name": "Crema di Zucca", "supplier": "Alimentari", "category": "Salse", "unit": "Kg" },
+    { "id": 57, "name": "Passata di Pomodoro", "supplier": "Alimentari", "category": "Salse", "unit": "L" },
+    { "id": 58, "name": "Nutella", "supplier": "Alimentari", "category": "Salse", "unit": "Kg" },
+
+    // Dispensa / Surgelati / Spezie
+    { "id": 59, "name": "Olio Extravergine d'Oliva", "supplier": "Alimentari", "category": "Spezie", "unit": "L" },
+    { "id": 60, "name": "Sale", "supplier": "Alimentari", "category": "Spezie", "unit": "Kg" },
+    { "id": 61, "name": "Pepe", "supplier": "Alimentari", "category": "Spezie", "unit": "Kg" },
+    { "id": 62, "name": "Origano", "supplier": "Alimentari", "category": "Spezie", "unit": "Kg" },
+    { "id": 63, "name": "Zucchero a Velo", "supplier": "Alimentari", "category": "Spezie", "unit": "Kg" },
+    { "id": 64, "name": "Granella di Pistacchio", "supplier": "Alimentari", "category": "Spezie", "unit": "Kg" },
+    { "id": 65, "name": "Mandorle Tostate", "supplier": "Alimentari", "category": "Spezie", "unit": "Kg" },
+    { "id": 66, "name": "Semi di Chia", "supplier": "Alimentari", "category": "Spezie", "unit": "Kg" },
+    { "id": 67, "name": "Pomodorino Confit", "supplier": "Alimentari", "category": "Spezie", "unit": "Kg" },
+    { "id": 68, "name": "Pomodori Secchi / Capuliato", "supplier": "Alimentari", "category": "Spezie", "unit": "Kg" },
+    { "id": 69, "name": "Patatine Fritte Surgelate", "supplier": "Surgelati", "category": "Surgelati", "unit": "Ct" },
+    { "id": 70, "name": "Chips di Patate", "supplier": "Alimentari", "category": "Surgelati", "unit": "Ct" },
+    { "id": 71, "name": "Anelli di Cipolla Surgelati", "supplier": "Surgelati", "category": "Surgelati", "unit": "Ct" },
+    
+    // Packaging (Default generici)
+    { "id": 72, "name": "Scatole Burger", "supplier": "Packaging", "category": "Packaging", "unit": "Ct" },
+    { "id": 73, "name": "Scatole Pizza", "supplier": "Packaging", "category": "Packaging", "unit": "Ct" },
+    { "id": 74, "name": "Tovaglioli", "supplier": "Packaging", "category": "Packaging", "unit": "Ct" },
+
+    // Carni Aggiuntive
+    { "id": 75, "name": "Alette di Pollo", "supplier": "Macelleria", "category": "Carni", "unit": "Kg" },
+    { "id": 76, "name": "Alette di Pollo Piccanti", "supplier": "Macelleria", "category": "Carni", "unit": "Kg" },
+    { "id": 77, "name": "Tartare / Battuta di Manzo", "supplier": "Macelleria", "category": "Carni", "unit": "Kg" },
+    { "id": 78, "name": "Filetto di Manzo", "supplier": "Macelleria", "category": "Carni", "unit": "Kg" },
+    { "id": 79, "name": "Costata di Cinta Senese", "supplier": "Macelleria", "category": "Carni", "unit": "Kg" },
+    { "id": 80, "name": "Stinco di Maiale", "supplier": "Macelleria", "category": "Carni", "unit": "Pz" },
+    { "id": 81, "name": "Guanciale", "supplier": "Salumificio", "category": "Carni", "unit": "Kg" },
+    
+    // Latticini Aggiuntivi
+    { "id": 82, "name": "Pecorino Romano", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    
+    // Ortofrutta e Varie Aggiuntive
+    { "id": 83, "name": "Peperoni", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 84, "name": "Lattuga", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 85, "name": "Carote a Julienne", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 86, "name": "Cipolla di Tropea / Rossa", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 87, "name": "Mais", "supplier": "Alimentari", "category": "Spezie", "unit": "Ct" },
+    { "id": 88, "name": "Olive Nere", "supplier": "Alimentari", "category": "Spezie", "unit": "Kg" },
+    { "id": 89, "name": "Casarecce / Pasta Fresca", "supplier": "Panificio", "category": "Bakery", "unit": "Kg" },
+    { "id": 90, "name": "Tagliatelle", "supplier": "Panificio", "category": "Bakery", "unit": "Kg" },
+    { "id": 91, "name": "Tonno in scatola", "supplier": "Alimentari", "category": "Pesce", "unit": "Ct" },
+    { "id": 92, "name": "Birra (Cottura)", "supplier": "Alimentari", "category": "Spezie", "unit": "L" }
 ];
 let appConfig = {
     appName: "Burger Lab",
