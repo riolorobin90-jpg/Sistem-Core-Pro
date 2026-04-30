@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pannello di Controllo Pro</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- PWA / Mobile App Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Burger Lab Admin">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#050505',
+                            card: 'rgba(255, 255, 255, 0.03)',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            orange: 'var(--brand-orange, #FF512F)',
+                            red: 'var(--brand-red, #DD2476)',
+                            whatsapp: '#00E676'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        @supports (scrollbar-width: none) {
+            .no-scrollbar { scrollbar-width: none; }
+        }
+        .no-scrollbar { -ms-overflow-style: none; }
+        
+        body {
+            background-color: #050505;
+            color: #ffffff;
+        }
+
+        .glass-panel {
+            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(24px);
+            background: rgba(10, 10, 12, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .no-select {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        input, select {
+            color: black;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased pb-48 selection:bg-brand-orange selection:text-white relative overflow-x-hidden">
+
+    <header class="fixed top-0 inset-x-0 z-40 bg-brand-dark/40 backdrop-blur-3xl border-b border-white/10 shadow-2xl">
+        <div class="max-w-4xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html" aria-label="Torna alla Home" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                </a>
+                <h1 class="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 tracking-tight">Pannello Admin</h1>
+            </div>
+            <button id="btn-save" class="bg-gradient-to-r from-brand-orange to-brand-red text-white font-bold py-2 px-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 active:scale-95">
+                Salva Modifiche
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 pt-32 space-y-12">
+        <!-- Generali -->
+        <section class="glass-panel rounded-3xl p-8">
+            <h2 class="text-2xl font-black mb-6">Impostazioni Generali</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <label for="cfg-app-name" class="block text-sm text-white/50 font-bold mb-2 uppercase tracking-wider">Nome Attività</label>
+                    <input type="text" id="cfg-app-name" class="w-full bg-white/5 border border-white/10 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-brand-orange">
+                </div>
+                <div>
+                    <label for="cfg-subtitle" class="block text-sm text-white/50 font-bold mb-2 uppercase tracking-wider">Sottotitolo (es. System Core Pro)</label>
+                    <input type="text" id="cfg-subtitle" class="w-full bg-white/5 border border-white/10 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-brand-orange">
+                </div>
+                <div>
+                    <label for="cfg-status-text" class="block text-sm text-white/50 font-bold mb-2 uppercase tracking-wider">Testo Barra (es. Live Order System)</label>
+                    <input type="text" id="cfg-status-text" class="w-full bg-white/5 border border-white/10 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-brand-orange">
+                </div>
+                <div>
+                    <label for="cfg-whatsapp-number" class="block text-sm text-white/50 font-bold mb-2 uppercase tracking-wider">Numero WhatsApp (opzionale)</label>
+                    <input type="text" id="cfg-whatsapp-number" placeholder="Es. 393331234567" class="w-full bg-white/5 border border-white/10 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-brand-orange">
+                </div>
+                <div>
+                    <label for="cfg-logo-file" class="block text-sm text-white/50 font-bold mb-2 uppercase tracking-wider">Logo (Immagine)</label>
+                    <div class="flex items-center gap-4">
+                        <div id="logo-preview" class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
+                            <span class="text-xs text-white/30">N/A</span>
+                        </div>
+                        <input type="file" id="cfg-logo-file" accept="image/*" class="text-sm text-white/70 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-white/10 file:text-white hover:file:bg-white/20 transition-all cursor-pointer">
+                        <button id="btn-remove-logo" class="text-red-500 text-sm hidden">Rimuovi</button>
+                    </div>
+                </div>
+                <div>
+                    <label for="cfg-color-primary" class="block text-sm text-white/50 font-bold mb-2 uppercase tracking-wider">Colore Primario</label>
+                    <div class="flex gap-2">
+                        <input type="color" id="cfg-color-primary" class="h-12 w-12 rounded-lg bg-transparent border-0 cursor-pointer">
+                        <input type="text" id="cfg-color-primary-text" aria-label="Valore colore primario" class="flex-1 bg-white/5 border border-white/10 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-brand-orange" readonly>
+                    </div>
+                </div>
+                <div>
+                    <label for="cfg-color-secondary" class="block text-sm text-white/50 font-bold mb-2 uppercase tracking-wider">Colore Secondario</label>
+                    <div class="flex gap-2">
+                        <input type="color" id="cfg-color-secondary" class="h-12 w-12 rounded-lg bg-transparent border-0 cursor-pointer">
+                        <input type="text" id="cfg-color-secondary-text" aria-label="Valore colore secondario" class="flex-1 bg-white/5 border border-white/10 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-brand-orange" readonly>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prodotti -->
+        <section class="glass-panel rounded-3xl p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-black">Catalogo Articoli</h2>
+                <button id="btn-add-product" class="bg-white/10 hover:bg-white/20 text-white font-bold py-2 px-4 rounded-xl transition-all">
+                    + Nuovo Articolo
+                </button>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-white/50 text-xs uppercase tracking-widest border-b border-white/10">
+                            <th class="pb-3 px-2">Nome</th>
+                            <th class="pb-3 px-2">Fornitore</th>
+                            <th class="pb-3 px-2">Categoria</th>
+                            <th class="pb-3 px-2">Unità</th>
+                            <th class="pb-3 px-2 text-right">Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-list" class="text-sm">
+                        <!-- Generato via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Prodotto -->
+    <div id="modal-product" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
+        <div class="bg-brand-card backdrop-blur-3xl border border-brand-border rounded-[2rem] w-full max-w-md p-8 transform scale-95 transition-transform duration-300" id="modal-content">
+            <h3 class="text-2xl font-black mb-6" id="modal-title">Nuovo Articolo</h3>
+            <div class="space-y-4">
+                <input type="hidden" id="modal-id">
+                <div>
+                    <label for="modal-name" class="block text-sm text-white/50 mb-1">Nome Articolo</label>
+                    <input type="text" id="modal-name" class="w-full bg-white/5 border border-white/10 text-white px-4 py-2 rounded-xl focus:outline-none focus:border-brand-orange">
+                </div>
+                <div>
+                    <label for="modal-supplier" class="block text-sm text-white/50 mb-1">Fornitore</label>
+                    <input type="text" id="modal-supplier" class="w-full bg-white/5 border border-white/10 text-white px-4 py-2 rounded-xl focus:outline-none focus:border-brand-orange">
+                </div>
+                <div>
+                    <label for="modal-category" class="block text-sm text-white/50 mb-1">Categoria (es. Ortofrutta, Carni)</label>
+                    <input type="text" id="modal-category" class="w-full bg-white/5 border border-white/10 text-white px-4 py-2 rounded-xl focus:outline-none focus:border-brand-orange">
+                </div>
+                <div>
+                    <label for="modal-unit" class="block text-sm text-white/50 mb-1">Unità di Misura (es. Kg, Pz)</label>
+                    <input type="text" id="modal-unit" class="w-full bg-white/5 border border-white/10 text-white px-4 py-2 rounded-xl focus:outline-none focus:border-brand-orange">
+                </div>
+                <div class="flex gap-4 mt-8">
+                    <button class="flex-1 bg-white/5 hover:bg-white/10 text-white font-bold py-3 rounded-xl transition-all" id="btn-cancel-modal">Annulla</button>
+                    <button class="flex-1 bg-gradient-to-r from-brand-orange to-brand-red text-white font-bold py-3 rounded-xl transition-all" id="btn-save-modal">Conferma</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-brand-whatsapp text-black font-bold px-6 py-3 rounded-xl shadow-[0_0_20px_rgba(0,230,118,0.3)] transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        Salvataggio completato!
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
