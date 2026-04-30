@@ -87,7 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const categories = [...new Set(productsData.map(p => p.category))];
         let html = '';
         categories.forEach(cat => {
-            html += `<tr class="bg-white/5"><td colspan="5" class="py-3 px-4 font-black text-brand-orange uppercase tracking-widest text-xs">${cat}</td></tr>`;
+            html += `
+            <tr class="bg-white/5">
+                <td colspan="4" class="py-3 px-4 font-black text-brand-orange uppercase tracking-widest text-xs">${cat}</td>
+                <td class="py-3 px-2 text-right">
+                    <button class="text-xs bg-brand-orange/20 text-brand-orange hover:bg-brand-orange hover:text-white px-3 py-1 rounded-lg transition-colors font-bold btn-add-cat-product" data-cat="${cat}">+ Aggiungi</button>
+                </td>
+            </tr>`;
             const items = productsData.filter(p => p.category === cat);
             html += items.map(p => `
                 <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
@@ -107,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         productsList.innerHTML = html;
 
+        document.querySelectorAll('.btn-add-cat-product').forEach(b => b.onclick = e => openModal(null, e.target.dataset.cat));
         document.querySelectorAll('.btn-edit-product').forEach(b => b.onclick = e => openModal(e.target.dataset.id));
         document.querySelectorAll('.btn-del-product').forEach(b => b.onclick = e => {
             if(confirm("Eliminare questo articolo?")) {
@@ -118,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Modal logic
-    function openModal(id = null) {
+    function openModal(id = null, defaultCategory = "") {
         if (id) {
             const p = productsData.find(x => x.id == id);
             document.getElementById('modal-title').innerText = "Modifica Articolo";
@@ -133,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('modal-id').value = "";
             document.getElementById('modal-name').value = "";
             document.getElementById('modal-supplier').value = "";
-            document.getElementById('modal-category').value = "";
+            document.getElementById('modal-category').value = defaultCategory;
             document.getElementById('modal-unit').value = "";
             document.getElementById('modal-whatsapp').value = "";
         }
