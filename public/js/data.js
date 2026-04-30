@@ -32,6 +32,9 @@ let productsData = [
 ];
 let appConfig = {
     appName: "Burger Lab",
+    subtitle: "System Core Pro",
+    statusText: "Live Order System",
+    whatsappNumber: "",
     primaryColor: "#FF512F",
     secondaryColor: "#DD2476",
     logoBase64: ""

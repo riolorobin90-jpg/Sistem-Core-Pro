@@ -60,11 +60,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             logoContainer.innerHTML = `<img src="${appConfig.logoBase64}" class="w-10 h-10 object-contain">`;
         }
         
-        // Update Title
+        // Update Texts
         const nameDisplay = document.getElementById('app-name-display');
-        if (nameDisplay) {
-            nameDisplay.innerText = appConfig.appName;
-        }
+        if (nameDisplay) nameDisplay.innerText = appConfig.appName || "Burger Lab";
+        
+        const subtitleDisplay = document.getElementById('app-subtitle-display');
+        if (subtitleDisplay) subtitleDisplay.innerText = appConfig.subtitle || "System Core Pro";
+        
+        const statusDisplay = document.getElementById('app-status-display');
+        if (statusDisplay) statusDisplay.innerText = appConfig.statusText || "Live Order System";
     }
 
     function renderCategories() {
@@ -187,7 +191,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             message += `\n`;
         });
 
-        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+        const phone = appConfig.whatsappNumber ? appConfig.whatsappNumber.replace(/[^0-9]/g, '') : '';
+        const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
     };
 });

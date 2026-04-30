@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     // UI Elements
     const cfgAppName = document.getElementById('cfg-app-name');
+    const cfgSubtitle = document.getElementById('cfg-subtitle');
+    const cfgStatusText = document.getElementById('cfg-status-text');
+    const cfgWhatsappNumber = document.getElementById('cfg-whatsapp-number');
     const cfgColorPrimary = document.getElementById('cfg-color-primary');
     const cfgColorPrimaryText = document.getElementById('cfg-color-primary-text');
     const cfgColorSecondary = document.getElementById('cfg-color-secondary');
@@ -25,8 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initUI() {
         // Init Config
-        cfgAppName.value = appConfig.appName;
-        cfgColorPrimary.value = appConfig.primaryColor;
+        cfgAppName.value = appConfig.appName || "Burger Lab";
+        cfgSubtitle.value = appConfig.subtitle || "System Core Pro";
+        cfgStatusText.value = appConfig.statusText || "Live Order System";
+        cfgWhatsappNumber.value = appConfig.whatsappNumber || "";
+        cfgColorPrimary.value = appConfig.primaryColor || "#FF512F";
         cfgColorPrimaryText.value = appConfig.primaryColor;
         cfgColorSecondary.value = appConfig.secondaryColor;
         cfgColorSecondaryText.value = appConfig.secondaryColor;
@@ -165,6 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Save All
     document.getElementById('btn-save').onclick = async () => {
         appConfig.appName = cfgAppName.value;
+        appConfig.subtitle = cfgSubtitle.value;
+        appConfig.statusText = cfgStatusText.value;
+        appConfig.whatsappNumber = cfgWhatsappNumber.value;
         appConfig.primaryColor = cfgColorPrimaryText.value;
         appConfig.secondaryColor = cfgColorSecondaryText.value;
         appConfig.logoBase64 = currentLogoBase64;
