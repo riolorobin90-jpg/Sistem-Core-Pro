@@ -4,7 +4,7 @@
  */
 
 const SUPABASE_URL = 'https://epzgzyytcszsfsaxemnj.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwemd6eXl0Y3N6c2ZzYXhlbW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQxMzQyNDIsImV4cCI6MjAyOTcxMDI0Mn0.N6U-Hjc0MDgxeNn0.5rbKhco2A1O9aumcWWkg5abJYErJjZbm5oNsR2qi8UU';
+const SUPABASE_KEY = 'sb_publishable_7bEHJexUgEb5gE2Zf1HmLw_AL94bRIt';
 
 let productsData = [
     // Bakery
@@ -95,7 +95,31 @@ let productsData = [
     // Packaging (Default generici)
     { "id": 72, "name": "Scatole Burger", "supplier": "Packaging", "category": "Packaging", "unit": "Ct" },
     { "id": 73, "name": "Scatole Pizza", "supplier": "Packaging", "category": "Packaging", "unit": "Ct" },
-    { "id": 74, "name": "Tovaglioli", "supplier": "Packaging", "category": "Packaging", "unit": "Ct" }
+    { "id": 74, "name": "Tovaglioli", "supplier": "Packaging", "category": "Packaging", "unit": "Ct" },
+
+    // Carni Aggiuntive
+    { "id": 75, "name": "Alette di Pollo", "supplier": "Macelleria", "category": "Carni", "unit": "Kg" },
+    { "id": 76, "name": "Alette di Pollo Piccanti", "supplier": "Macelleria", "category": "Carni", "unit": "Kg" },
+    { "id": 77, "name": "Tartare / Battuta di Manzo", "supplier": "Macelleria", "category": "Carni", "unit": "Kg" },
+    { "id": 78, "name": "Filetto di Manzo", "supplier": "Macelleria", "category": "Carni", "unit": "Kg" },
+    { "id": 79, "name": "Costata di Cinta Senese", "supplier": "Macelleria", "category": "Carni", "unit": "Kg" },
+    { "id": 80, "name": "Stinco di Maiale", "supplier": "Macelleria", "category": "Carni", "unit": "Pz" },
+    { "id": 81, "name": "Guanciale", "supplier": "Salumificio", "category": "Carni", "unit": "Kg" },
+    
+    // Latticini Aggiuntivi
+    { "id": 82, "name": "Pecorino Romano", "supplier": "Caseificio", "category": "Latticini", "unit": "Kg" },
+    
+    // Ortofrutta e Varie Aggiuntive
+    { "id": 83, "name": "Peperoni", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 84, "name": "Lattuga", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 85, "name": "Carote a Julienne", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 86, "name": "Cipolla di Tropea / Rossa", "supplier": "Ortofrutta", "category": "Ortofrutta", "unit": "Kg" },
+    { "id": 87, "name": "Mais", "supplier": "Alimentari", "category": "Spezie", "unit": "Ct" },
+    { "id": 88, "name": "Olive Nere", "supplier": "Alimentari", "category": "Spezie", "unit": "Kg" },
+    { "id": 89, "name": "Casarecce / Pasta Fresca", "supplier": "Panificio", "category": "Bakery", "unit": "Kg" },
+    { "id": 90, "name": "Tagliatelle", "supplier": "Panificio", "category": "Bakery", "unit": "Kg" },
+    { "id": 91, "name": "Tonno in scatola", "supplier": "Alimentari", "category": "Pesce", "unit": "Ct" },
+    { "id": 92, "name": "Birra (Cottura)", "supplier": "Alimentari", "category": "Spezie", "unit": "L" }
 ];
 let appConfig = {
     appName: "Burger Lab",

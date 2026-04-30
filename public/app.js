@@ -181,19 +181,89 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        const suppliers = [...new Set(productsData.filter(p => order[p.id]).map(p => p.supplier))];
-        let message = `🚀 *ORDINE ${appConfig.appName.toUpperCase()}*\n📅 Data: ${new Date().toLocaleDateString()}\n\n`;
+        const globalPhone = appConfig.whatsappNumber ? appConfig.whatsappNumber.replace(/[^0-9]/g, '') : '';
+        const orderGroups = {};
 
-        suppliers.forEach(sup => {
-            message += `*DA: ${sup.toUpperCase()}*\n`;
-            productsData.filter(p => p.supplier === sup && order[p.id]).forEach(p => {
-                message += `- ${p.name}: ${order[p.id]} ${p.unit}\n`;
-            });
-            message += `\n`;
+        // Raggruppa i prodotti ordinati per numero WhatsApp
+        productsData.filter(p => order[p.id]).forEach(p => {
+            const phone = p.whatsapp ? p.whatsapp.replace(/[^0-9]/g, '') : globalPhone;
+            const key = phone || 'default';
+            if (!orderGroups[key]) orderGroups[key] = { phone: phone, items: [] };
+            orderGroups[key].items.push(p);
         });
 
-        const phone = appConfig.whatsappNumber ? appConfig.whatsappNumber.replace(/[^0-9]/g, '') : '';
-        const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
+        const groups = Object.values(orderGroups);
+
+        function generateMessage(items) {
+            const suppliers = [...new Set(items.map(p => p.supplier))];
+            let message = `🚀 *ORDINE ${appConfig.appName.toUpperCase()}*\n📅 Data: ${new Date().toLocaleDateString()}\n\n`;
+
+            suppliers.forEach(sup => {
+                message += `*DA: ${sup.toUpperCase()}*\n`;
+                items.filter(p => p.supplier === sup).forEach(p => {
+                    message += `- ${p.name}: ${order[p.id]} ${p.unit}\n`;
+                });
+                message += `\n`;
+            });
+            return message;
+        }
+
+        if (groups.length === 1) {
+            // Solo un gruppo, invia normalmente
+            const grp = groups[0];
+            const msg = generateMessage(grp.items);
+            const whatsappUrl = `https://wa.me/${grp.phone}?text=${encodeURIComponent(msg)}`;
+            window.open(whatsappUrl, '_blank');
+        } else {
+            // Multipli numeri, mostra la modale per invii separati
+            let modal = document.getElementById('modal-multi-order');
+            if(!modal) {
+                modal = document.createElement('div');
+                modal.id = 'modal-multi-order';
+                modal.className = 'fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 hidden';
+                document.body.appendChild(modal);
+            }
+            
+            let html = `
+            <div class="bg-brand-card backdrop-blur-3xl border border-brand-border rounded-[2rem] w-full max-w-md p-8 transform transition-transform duration-300 shadow-2xl">
+                <h3 class="text-2xl font-black mb-2 text-white">Ordini Separati</h3>
+                <p class="text-sm text-white/50 mb-6">Hai inserito prodotti da fornitori speciali (es. MD). Clicca sui tasti per inviare ogni ordine al suo numero.</p>
+                <div class="space-y-3 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">`;
+
+            groups.forEach(grp => {
+                const sups = [...new Set(grp.items.map(p => p.supplier))].join(', ');
+                const qty = grp.items.length;
+                const msg = generateMessage(grp.items);
+                const url = `https://wa.me/${grp.phone}?text=${encodeURIComponent(msg)}`;
+                html += `
+                <a href="${url}" target="_blank" class="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/10 p-4 rounded-xl transition-all group">
+                    <div class="overflow-hidden">
+                        <div class="text-brand-orange font-bold text-sm truncate w-[180px]">${sups}</div>
+                        <div class="text-xs text-white/50">${grp.phone ? 'WA: '+grp.phone : 'Base'}</div>
+                    </div>
+                    <div class="text-right flex items-center gap-3">
+                        <div class="text-sm text-white font-bold">${qty} Articoli</div>
+                        <div class="bg-[#25D366] text-white p-2 rounded-lg group-hover:scale-110 transition-transform"><i data-lucide="send" class="w-4 h-4"></i></div>
+                    </div>
+                </a>`;
+            });
+
+            html += `</div>
+                <button id="btn-close-multi" class="w-full mt-6 bg-white/5 hover:bg-white/10 text-white font-bold py-3 rounded-xl transition-all">Chiudi</button>
+            </div>`;
+            
+            modal.innerHTML = html;
+            modal.classList.remove('hidden');
+            // Allow reflow
+            void modal.offsetWidth;
+            modal.classList.remove('opacity-0');
+            
+            if(window.lucide) window.lucide.createIcons();
+
+            document.getElementById('btn-close-multi').onclick = () => {
+                modal.classList.add('opacity-0');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            };
+        }
     };
 });
